@@ -5,6 +5,7 @@
 
 float Mat[N][N], MatDD[N][N];
 float V1[N], V2[N], V3[N];
+
 void InitData(){
 
   int i,j;
@@ -59,37 +60,11 @@ void  MultEscalar( float vect[N], float vectres[N], float alfa ){
   }
 }
 
-float Scalar( float vect1[N], float vect2[N] ){
-  float r = 0;
-  for (int i=0; i<N; i++){
-    r = r + ( vect1[i] * vect2[i] );
-  }
-  return r;
-}
-
-float Magnitude( float vect[N] ){
-  float magn = 0;
-  for (int i=0; i<N; i++){
-    magn = magn + vect[i] * vect[i];
-  }
-  magn = sqrt(magn);
-  return magn;
-}
-
 int main(){
+  float y = 3.0;
+  float res[N];
   InitData();
-  float res_vect[N];
-  float escalar = 3.0;
+  MultEscalar(V1, res, y);
   PrintVect(V1, 0, 10);
-  PrintVect(V1, 256, 10);
-  PrintVect(V2, 0, 10);
-  PrintVect(V2, 256, 10);
-  PrintVect(V3, 0, 10);
-  PrintVect(V3, 256, 10);
-  PrintRow(Mat, 0, 0, 10);
-  PrintRow(Mat, 100, 0, 10);
-  MultEscalar(V1, res_vect, escalar);
-  escalar = Scalar(V1, V2);
-  printf("%f\n", escalar); //Hauria de donar zero
+  PrintVect(res, 0, 10);
 }
-
