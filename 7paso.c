@@ -86,6 +86,9 @@ int Ortogonal( float vect1[N], float vect2[N] ){
   }
   return r;
 }
+void  Projection( float vect1[N], float vect2[N], float vectres[N] ){
+  
+}
 
 int main(){
   InitData();
