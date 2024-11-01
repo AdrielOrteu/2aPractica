@@ -86,6 +86,7 @@ int Ortogonal( float vect1[N], float vect2[N] ){
   }
   return r;
 }
+
 void  Projection( float vect1[N], float vect2[N], float vectres[N] ){
   float scalar_mult, magn_v2, div_scalar_magn;
   scalar_mult = Scalar(vect1,  vect2);
@@ -94,9 +95,85 @@ void  Projection( float vect1[N], float vect2[N], float vectres[N] ){
   MultEscalar(vect2, vectres, div_scalar_magn);
 }
 
+float Infininorm( float M[N][N] ){
+  float acumulador, inf_max;
+  for (int i=0; i<N; i++){
+    acumulador = 0;
+    for (int j=0; j<N; j++){
+      acumulador = acumulador + fabs(M[i][j]);
+    }
+    if ( acumulador > inf_max ){
+      inf_max = acumulador;
+    }
+  }
+  return inf_max;
+}
+
+
+float Onenorm( float M[N][N] ){
+  float acumulador, u_max;
+  for (int j=0; j<N; j++){
+    acumulador = 0;
+    for (int i=0; i<N; i++){
+      acumulador = acumulador + fabs(M[i][j]);
+    }
+    if ( acumulador > u_max ){
+      u_max = acumulador;
+    }
+  }
+  return u_max;
+}
+
+float NormFrobenius( float M[N][N] ){
+  float square_accumulator, result;
+  for (int i=0; i<N; i++){
+    for (int j=0; j<N; j++){
+      square_accumulator = square_accumulator + pow(M[i][j], 2);
+    }
+  }
+  result = sqrt(square_accumulator);
+  return result;
+}
+
+int DiagonalDom( float M[N][N] ){
+  float diagonal, matriu_exclosa;
+  int b_diagonalDom = 0;
+//  printf("INSIDE FUNC\n");
+  for (int i=0; i<N; i++){
+//    printf("INSIDE i LOOP\n");
+    for (int j=0; j<N; j++){
+//      printf("i=%d  j=%d\n", i, j);
+      if (i==j){
+       diagonal = diagonal + fabs( M[i][j] );
+//       printf("%f  %f\n", diagonal, fabs( M[i][j] ));
+      }else{
+        matriu_exclosa = matriu_exclosa + fabs( M[i][j] );
+      }
+    }
+  }
+//  printf("%d  %f  %f\n", b_diagonalDom, diagonal, matriu_exclosa);
+  if (diagonal >= matriu_exclosa){
+    b_diagonalDom = 1;
+  }
+//  printf("%d\n", b_diagonalDom);
+  return b_diagonalDom;
+}
+
+void Matriu_x_Vector( float M[N][N], float vect[N], float vectres[N] ){
+  float EscalarMult_accumulador;
+  for (int i=0; i<N; i++){
+    EscalarMult_accumulador = 0;
+    for (int j=0; j<N; j++){
+      EscalarMult_accumulador = EscalarMult_accumulador + M[i][j] * vect[j];
+    }
+    vectres[i] = EscalarMult_accumulador;
+  }
+}
+
 int main(){
   InitData();
-  float resultat[N];
-  Projection( V2, V3, resultat );
-  PrintVect( resultat, 0, 10 );
+  float vectorR[N];
+  Matriu_x_Vector( Mat, V2, vectorR );
+  PrintVect( vectorR, 0, 10 );
 }
+

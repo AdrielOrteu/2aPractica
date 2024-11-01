@@ -86,6 +86,7 @@ int Ortogonal( float vect1[N], float vect2[N] ){
   }
   return r;
 }
+
 void  Projection( float vect1[N], float vect2[N], float vectres[N] ){
   float scalar_mult, magn_v2, div_scalar_magn;
   scalar_mult = Scalar(vect1,  vect2);
@@ -94,9 +95,24 @@ void  Projection( float vect1[N], float vect2[N], float vectres[N] ){
   MultEscalar(vect2, vectres, div_scalar_magn);
 }
 
+float Infininorm( float M[N][N] ){
+  float a, r;
+  for (int i=0; i<N; i++){
+    a = 0;
+    for (int j=0; j<N; j++){
+      a = a + fabs(M[i][j]);
+    }
+    if ( a > r ){
+      r = a;
+    }
+  }
+  return r;
+}
+
 int main(){
   InitData();
-  float resultat[N];
-  Projection( V2, V3, resultat );
-  PrintVect( resultat, 0, 10 );
+  float b;
+  b = Onenorm( Mat );
+  printf("%f\n", b);
 }
+
