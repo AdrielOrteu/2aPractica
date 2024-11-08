@@ -204,6 +204,39 @@ float Comprovacio( float M[N][N], float vect[N], float solucio[N] ){
 
 int main(){
   InitData();
+
+  float res_vect[N];
+  float escalar = 3.0;
+  PrintVect(V1, 0, 10);
+  PrintVect(V1, 256, 10);
+  PrintVect(V2, 0, 10);
+  PrintVect(V2, 256, 10);
+  PrintVect(V3, 0, 10);
+  PrintVect(V3, 256, 10);
+  PrintRow(Mat, 0, 0, 10);
+  PrintRow(Mat, 100, 0, 10);
+  MultEscalar(V1, res_vect, escalar);
+  escalar = Scalar(V1, V2);
+  printf("%f\n", escalar); //Hauria de donar zero
+  escalar = Magnitude( V3 );
+  printf("%f\n", escalar);
+  int enter;
+  enter = Ortogonal( V1, V2 );
+  printf("%d\n", enter);
+
+  float resultat[N];
+  Projection( V2, V3, resultat );
+  PrintVect( resultat, 0, 10 );
+
+  float b;
+  b = Onenorm( Mat );
+  printf("%f\n", b);
+
+
+
+
+
+
   int B_result;
   float res[N];
   float multVect[N];

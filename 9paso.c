@@ -125,6 +125,8 @@ float Onenorm( float M[N][N] ){
 }
 int main(){
   InitData();
-  
+  float resultado;
+  resultado = Onenorm( Mat );
+  printf( "%d\n", resultado );
 }
 
