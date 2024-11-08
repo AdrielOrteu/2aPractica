@@ -232,10 +232,17 @@ int main(){
   b = Onenorm( Mat );
   printf("%f\n", b);
 
+  float r;
+  r = NormFrobenius( Mat );
+  printf( "%f\n", r);
 
+  int a;
+  a = DiagonalDom( MatDD );
+  printf("%d\n", a);
 
-
-
+  float vectorR[N];
+  Matriu_x_Vector( Mat, V2, vectorR );
+  PrintVect( vectorR, 0, 10 );
 
   int B_result;
   float res[N];
